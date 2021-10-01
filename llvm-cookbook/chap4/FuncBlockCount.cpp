@@ -1,9 +1,10 @@
 //===- FuncBlockCount.cpp - Modified example code from "llvm-cookbook" ---------------===//
+//===- LLVM version: 9.0.0 ---------------===//
 
 #include "llvm/IR/Function.h"
 #include "llvm/Pass.h"
 #include "llvm/Support/raw_ostream.h"
-#include "llvm/Analysis/LoopInfo.h"
+#include "llvm/Analysis/LoopInfo.h"  // llvm-cookbook miss 1
 using namespace llvm;
 
 #define DEBUG_TYPE "funcblockcount"
@@ -42,6 +43,7 @@ namespace {
       return false;
     }
 
+    // llvm-cookbook miss 2
     virtual void getAnalysisUsage(AnalysisUsage& AU) const override {
       AU.addRequired<LoopInfoWrapperPass>();
     }
