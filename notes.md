@@ -22,5 +22,33 @@
         AU.addRequired<LoopInfoWrapperPass>();
         }
         ```
-4. Compile this pass, run `make` in `build/` folder. Or only compile this new pass by using [llvm-pass-skeleton](https://github.com/sampsyo/llvm-pass-skeleton).
+4. Modify the CMakelists.txt in this pass folder and the parent folder.
+    ```c
+    // pass folder
+    if( NOT LLVM_REQUIRES_RTTI )
+    if( NOT LLVM_REQUIRES_EH )
+        set(LLVM_EXPORTED_SYMBOL_FILE ${CMAKE_CURRENT_SOURCE_DIR}/FuncBlockCount.exports)
+    endif()
+    endif()
 
+    if(WIN32 OR CYGWIN)
+    set(LLVM_LINK_COMPONENTS Core Support)
+    endif()
+
+    add_llvm_library( LLVMFuncBlockCount MODULE BUILDTREE_ONLY
+    FuncBlockCount.cpp
+
+    DEPENDS
+    intrinsics_gen
+    PLUGIN_TOOL
+    opt
+    )
+    -------------------------------------
+    // parent folder
+    add_subdirectory(xxx)
+    ```
+5. Compile this pass, run `make` in `build/` folder. Or only compile this new pass by using [llvm-pass-skeleton](https://github.com/sampsyo/llvm-pass-skeleton).
+
+### chap5
+
+- Add pass in the llvm/lib/Transforms/Scalar/
