@@ -81,7 +81,7 @@
 
 - [x] Choice 1. Install the (LLVM embedded toolchain for arm)[https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm]
 
-- [ ] Choice 2 . Use flags to specific the target. 
+- [TODO] Choice 2 . Use flags to specific the target. 
 For example, I install LLVM 9.0.0 and I haven't figure out how to add new pass of the upper repo. 
 And I don't want to reinstall the LLVM.
     - Use the`clang` to compile (learn from the previous repo *cfg files):
