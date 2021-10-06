@@ -52,3 +52,23 @@
 ### chap5
 
 - Add pass in the llvm/lib/Transforms/Scalar/
+
+### chap6
+
+- Life of an LLVM IR instrution:
+
+    > C code to LLVM IR \
+    &rarr; IR optimization \
+    &rarr; LLVM IR to SelectionDAG (visit each IR instruction to create an SDAGNode) \
+    &rarr; SelectionDAG legalization (make it to support target architecture) \
+    &rarr; Conversion from target-independent DAG to machine DAG (MachineSDNode, machine instructions are described in the target description .td file) \
+    &rarr; Scheduling instructions (covert d DAG into a linear set of instructions) \
+    &rarr; Register allocation (SSA has unlimited registers) \
+    &rarr; Code emission (JIT or llc: generate assembly instructions for a target)
+
+- Visualizing LLVM IR CFG using graphviz
+
+    ```shell
+    $ llc --view-dag-combine-lt-dags test.ll
+    $ dot -Tpng /tmp/dag._Z8additionv-88c78e.dot > test.png
+    ```
