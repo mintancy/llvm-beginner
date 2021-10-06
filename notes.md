@@ -80,6 +80,7 @@
 ## Set the LLVM to support embedded platform
 
 - [x] Choice 1. Install the (LLVM embedded toolchain for arm)[https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm]
+
 - [ ] Choice 2 . Use flags to specific the target. 
 For example, I install LLVM 9.0.0 and I haven't figure out how to add new pass of the upper repo. 
 And I don't want to reinstall the LLVM.
@@ -93,7 +94,7 @@ And I don't want to reinstall the LLVM.
         ```shell
         llc -mcpu=cortex-m33 target-program4.ll -o target-program4.s
         ```
-    
+
 ### Install arm-gcc and qemu
 
 1. Install arm gcc tool chain. ([Reference](https://askubuntu.com/questions/1243252/how-to-install-arm-none-eabi-gdb-on-ubuntu-20-04-lts-focal-fossa))
