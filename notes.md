@@ -1,3 +1,5 @@
+[TOC]
+
 ## Learn from llvm-cookbook
 
 ### Chap4
@@ -55,8 +57,7 @@
 
 ### chap6
 
-- Life of an LLVM IR instrution:
-
+- Life of an LLVM IR instruction:
     > C code to LLVM IR \
     &rarr; IR optimization \
     &rarr; LLVM IR to SelectionDAG (visit each IR instruction to create an SDAGNode) \
@@ -72,3 +73,13 @@
     $ llc --view-dag-combine-lt-dags test.ll
     $ dot -Tpng /tmp/dag._Z8additionv-88c78e.dot > test.png
     ```
+## Set the LLVM to support embedded platform
+
+- [x] Choice 1. Install the (LLVM embedded toolchain for arm)[https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm]
+- [ ] Choice 2 . Or try to patch the original LLVM. 
+For example, I install LLVM 9.0.0 and I haven't figure out how to add new pass of the upper repo. 
+And I don't want to reinstall the LLVM.
+  1. Install arm gcc tool chain. ([Reference](https://askubuntu.com/questions/1243252/how-to-install-arm-none-eabi-gdb-on-ubuntu-20-04-lts-focal-fossa))
+    - Download the arm gcc toolchain from [link](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads).
+    - `sudo tar xjf gcc-arm-none-eabi-your-version.bz2 -C /usr/share/`
+    - `sudo ln -s /usr/share/gcc-arm-none-eabi-your-version/bin/* /usr/bin/`
