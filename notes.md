@@ -1,5 +1,3 @@
-[TOC]
-
 ## Learn from llvm-cookbook
 
 ### Chap4
@@ -84,7 +82,7 @@
 - [TODO] Choice 2 . Use flags to specific the target. 
 For example, I install LLVM 9.0.0 and I haven't figure out how to add new pass of the upper repo. 
 And I don't want to reinstall the LLVM.
-    - Use the`clang` to compile (learn from the previous repo *cfg files):
+    - Use the `clang` to compile (learn from the previous repo *cfg files):
     ```shell
     clang --target=armv8m.main-non-eabi -mfloat-abi=soft -march=armv8m.main+nofp -fno-exceptions -fno-rtti -O0 -S -emit-llvm target-program.cpp -o target-program4.ll
     ```
@@ -97,15 +95,17 @@ And I don't want to reinstall the LLVM.
 
 ### Install arm-gcc and qemu
 
-1. Install arm gcc tool chain. ([Reference](https://askubuntu.com/questions/1243252/how-to-install-arm-none-eabi-gdb-on-ubuntu-20-04-lts-focal-fossa))
+1. Install arm gcc toolchain. ([Reference](https://askubuntu.com/questions/1243252/how-to-install-arm-none-eabi-gdb-on-ubuntu-20-04-lts-focal-fossa))
     - Download the arm gcc toolchain from [link](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads).
-    - `sudo tar xjf gcc-arm-none-eabi-your-version.bz2 -C /usr/share/`
-    - `sudo ln -s /usr/share/gcc-arm-none-eabi-your-version/bin/* /usr/bin/`
+        ```shell
+        sudo tar xjf gcc-arm-none-eabi-your-version.bz2 -C /usr/share/
+        sudo ln -s /usr/share/gcc-arm-none-eabi-your-version/bin/* /usr/bin/
+        ```
 
 2. Install qemu 4.0.0. [Reference](https://askubuntu.com/questions/1067722/how-do-i-install-qemu-3-0-on-ubuntu-18-04)
     - Update the python3. [Reference](https://www.atjiang.com/update-python3-on-ubuntu/).
         ```shell
-        $ sudo update
+        $ sudo apt update
         $ sudo apt install software-properties-common
         $ sudo add-apt-repository ppa:deadsnakes/ppa
         $ sudo apt update
@@ -119,13 +119,19 @@ And I don't want to reinstall the LLVM.
         $ sudo update-alternatives --config python3
         [select 2, and enter]
         ```
-    - Install Ninja: `sudo apt install ninja`
+    - Install Ninja: 
+        ```shell
+        sudo apt install ninja
+        ```
     - Clear previous installation: 
         ```shell
         sudo apt-get purge "qemu*"
         sudo apt-get autoremove
         ```
-        - Enable Source Code repositories in Software and Updates (software-properties-gtk) and then: `sudo apt-get build-dep qemu`
+        - Enable Source Code repositories in Software and Updates (software-properties-gtk) and then: 
+        ```shell
+        sudo apt-get build-dep qemu
+        ```
         - Download qemu and compile (I installed qemu 4.0.0 for `microbit` is supported since qemu 4.0.0):
         ```shell
         cd ~/Downloads
@@ -136,7 +142,7 @@ And I don't want to reinstall the LLVM.
     - Decide the target we want.
     I only need the x86 and arm, so specifi the confiration (run ./configure --help to get the suppported tareget list.). 
         ```shell
-        ./configure --target-list=aarch64-softmmu,arm-softmmu,aarch64-linux-user,aarch64_be-linux-user,arm-linux-user,armeb-linux-user,x86_64-softmmu,x86_64-linux-user 
+        ./configure --target-list=aarch64-softmmu,aarch64-linux-user,arm-softmmu,arm-linux-user,x86_64-softmmu,x86_64-linux-user 
         make
         ```
     - Use `checkinstall`, the qemu package will be generated as a .deb file and can be managed by the package manager.
@@ -152,3 +158,18 @@ And I don't want to reinstall the LLVM.
         QEMU emulator version 4.0.0
         Copyright (c) 2003-2019 Fabrice Bellard and the QEMU Project developers
         ```
+
+### Test FreeRTOS with qemu
+
+Refer to [FreeRTOS Demo for m3_mps2+](https://github.com/FreeRTOS/FreeRTOS/tree/main/FreeRTOS/Demo/CORTEX_M3_MPS2_QEMU_GCC)
+
+```shell
+ORTEX_M3_MPS2_QEMU_GCC git:(main) ✗ sudo qemu-system-arm -machine mps2-an385 -monitor null -semihosting \
+        --semihosting-config enable=on,target=native \
+        -kernel ./build/RTOSDemo.axf \
+        -serial stdio -nographic -s -S
+blinking
+blinking
+blinking
+blinking
+```
