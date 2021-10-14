@@ -4,6 +4,8 @@ int inc(int A) { return ++A; }
 
 int (*Fptr)(int) = &inc; // NOLINT
 
+typedef int (*funcPtr)(int);
+
 int testcall(int A) {A = Fptr(A); return A;}
 
 int testloop(int count)
@@ -26,9 +28,12 @@ int testconditionbr()
   {
     switch (i%2)
     {
-    case 0:
-      sum += i;
+    case 0:{
+      funcPtr test = (funcPtr)sum;
+      test(sum);
+      // sum += i;
       break;
+    }
     case 1:
       sum += 1;
       break;
