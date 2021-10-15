@@ -85,8 +85,27 @@ Check [notes](https://github.com/mintancy/llvm-beginner/blob/main/notes.md).
     ```
 ## Set the LLVM to support embedded platform
 
-- [x] Choice 1. Install the (LLVM embedded toolchain for arm)[https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm]
-    - Add new pass to the llvm repo.  
+- [x] Choice 1. LLVM embedded toolchain for arm
+  - [Install the toolchain](https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm) 
+  - Modify the <repo_root>/sample/src/<proj_name>/Makefile to generate .ll
+    ```Makefile
+    hello.ll: *.c
+      $(BIN_PATH)/clang --config armv6m_soft_nofp_rdimon_baremetal -g -T ../../ldscripts/microbit.ld -O0 -S -emit-llvm hello.c -o hello.ll
+    ```
+  - Gnereate the `.ll` file
+  - Add new pass
+    ```sh
+    # Add the folder in repo-1.0/llvm/lib/Transform/CollectTB
+    $ cp -r CollectTB <root_repo>/repo-1.0/llvm/lib/Transform/CollectTB
+    # Compile the new pass
+    $ cd <root_repo>/build-1.0/llvm
+    $ make -j4
+    ```
+  - Run new pass
+    ```sh
+    # run the new pass
+    $ ../../../build-0.1/llvm/bin/opt -load ../../../build-0.1/llvm/lib/LLVMCollectTB.so -collecttb -disable-output hello.ll
+    ```
 
 - [TODO] Choice 2 . Use flags to specific the target. 
 For example, I install LLVM 9.0.0 and I don't want to reinstall the LLVM.
