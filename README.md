@@ -86,10 +86,10 @@ Check [notes](https://github.com/mintancy/llvm-beginner/blob/main/notes.md).
 ## Set the LLVM to support embedded platform
 
 - [x] Choice 1. Install the (LLVM embedded toolchain for arm)[https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm]
+    - Add new pass to the llvm repo.  
 
 - [TODO] Choice 2 . Use flags to specific the target. 
-For example, I install LLVM 9.0.0 and I haven't figure out how to add new pass of the upper repo. 
-And I don't want to reinstall the LLVM.
+For example, I install LLVM 9.0.0 and I don't want to reinstall the LLVM.
     - Use the `clang` to compile (learn from the previous repo *cfg files):
     ```shell
     clang --target=armv8m.main-non-eabi -mfloat-abi=soft -march=armv8m.main+nofp -fno-exceptions -fno-rtti -O0 -S -emit-llvm target-program.cpp -o target-program4.ll
