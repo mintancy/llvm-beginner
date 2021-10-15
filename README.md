@@ -95,8 +95,8 @@ Check [notes](https://github.com/mintancy/llvm-beginner/blob/main/notes.md).
   - Gnereate the `.ll` file
   - Add new pass
     ```sh
-    # Add the folder in repo-1.0/llvm/lib/Transform/CollectTB
-    $ cp -r CollectTB <root_repo>/repo-1.0/llvm/lib/Transform/CollectTB
+    # Add the folder in repo-1.0/llvm/lib/Transform/Test
+    $ cp -r Test <root_repo>/repo-1.0/llvm/lib/Transform/Test
     # Compile the new pass
     $ cd <root_repo>/build-1.0/llvm
     $ make -j4
@@ -104,22 +104,22 @@ Check [notes](https://github.com/mintancy/llvm-beginner/blob/main/notes.md).
   - Run new pass
     ```sh
     # run the new pass
-    $ ../../../build-0.1/llvm/bin/opt -load ../../../build-0.1/llvm/lib/LLVMCollectTB.so -collecttb -disable-output hello.ll
+    $ ../../../build-0.1/llvm/bin/opt -load ../../../build-0.1/llvm/lib/LLVMTest.so -test -disable-output hello.ll
     ```
 
 - [TODO] Choice 2 . Use flags to specific the target. 
 For example, I install LLVM 9.0.0 and I don't want to reinstall the LLVM.
-    - Use the `clang` to compile (learn from the previous repo *cfg files):
+    - Use the `clang` to compile (learn from the previous repo `*cfg` files):
     ```shell
     clang --target=armv8m.main-non-eabi -mfloat-abi=soft -march=armv8m.main+nofp -fno-exceptions -fno-rtti -O0 -S -emit-llvm target-program.cpp -o target-program4.ll
     ```
-    - Use the llc to genreate the .s
+    - Use the `llc` to generate the .s
         - run `llc -march=arm -mattr=help` to check which cpu it supports
         - I select the cortex-m33:
         ```shell
         llc -mcpu=cortex-m33 target-program4.ll -o target-program4.s
         ```
-
+    - But this is not convenient to generate the executable `.elf` file since we need to write linker script for the simple tests.
 ### Install arm-gcc and qemu
 
 1. Install arm gcc toolchain. ([Reference](https://askubuntu.com/questions/1243252/how-to-install-arm-none-eabi-gdb-on-ubuntu-20-04-lts-focal-fossa))
