@@ -106,6 +106,13 @@ Check [notes](https://github.com/mintancy/llvm-beginner/blob/main/notes.md).
     # run the new pass
     $ ../../../build-0.1/llvm/bin/opt -load ../../../build-0.1/llvm/lib/LLVMTest.so -test -disable-output hello.ll
     ```
+  - Run samples and Debug (needs qemu version >= 4.0.0)
+    ```sh
+    $ make
+    $ make debug
+    $ arm-none-eabi-gdb hello.elf
+    (gdb) target remote :1234
+    ```
 
 - [TODO] Choice 2 . Use flags to specific the target. 
 For example, I install LLVM 9.0.0 and I don't want to reinstall the LLVM.
