@@ -6,7 +6,7 @@ LLVM installation: https://solarianprogrammer.com/2013/01/17/building-clang-libc
 
 Check [notes](https://github.com/mintancy/llvm-beginner/blob/main/notes.md).
 
-[llvm-cookbook notes](https://github.com/mintancy/Notes/tree/master/Courses)
+[llvm-cookbook notes](https://github.com/mintancy/Notes/tree/master/Courses/notes-LLVM-cookbook)
 
 ## Learn from llvm-cookbook
 
