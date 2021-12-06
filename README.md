@@ -157,7 +157,7 @@ For example, I install LLVM 9.0.0 and I don't want to reinstall the LLVM.
         ```
     - Install Ninja: 
         ```shell
-        sudo apt install ninja
+        sudo apt install ninja-build
         ```
     - Clear previous installation: 
         ```shell
